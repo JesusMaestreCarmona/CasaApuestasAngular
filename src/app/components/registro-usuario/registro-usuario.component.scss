@@ -1,0 +1,46 @@
+mat-form-field {
+    margin-left: 10px;
+    width: 100%;
+}
+
+mat-vertical {
+    padding-top: 10px !important;
+}
+
+form {
+    margin-top: 10px;
+}
+
+#loginRegistro {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+  
+.example-card {
+    width: 50%;
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+}
+
+.errorValidacion {
+    color: darkred;
+}
+
+button {
+    margin-right: 5px;
+}
+
+img {
+    border-radius: 50px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+}
+
+#divCambiarImagen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 40px;
+    margin-top: 10px;
+}

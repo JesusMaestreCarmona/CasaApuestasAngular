@@ -1,0 +1,75 @@
+<div class="contenedorPrincipal">
+  <mat-card class="example-card">
+      <mat-card-header>
+        <mat-card-title>{{ apuestasUsuario.length? 'Tienes ' + apuestasUsuario.length + ' apuestas ' + tipo : 'No tienes apuestas ' + tipo }}</mat-card-title>
+        <mat-card-subtitle>{{ apuestasUsuario.length? 'Haz click en la apuesta para ver sus datos' : 'Cuando el evento al que hayas apostado termine, aparecerá aqui dicha apuesta' }}</mat-card-subtitle>
+        <button mat-mini-fab color="primary" id="boton-recargar-apuestas" (click)="refreshClick.emit()" matTooltip="Refrescar">
+            <mat-icon>refresh</mat-icon>
+        </button>
+      </mat-card-header>
+
+      <mat-divider></mat-divider>
+      
+      <mat-card-content id="contenedorApuestas">
+  
+        <mat-accordion class="example-headers-align" multi>
+            <mat-expansion-panel *ngFor="let apuesta of apuestasUsuario"> 
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <img class="imgEquipo" src="data:image/png;base64,{{apuesta.evento.participante1.imagen}}">
+                  <span>{{ apuesta.evento.participante1.nombre }} </span>{{ (apuesta.evento.terminado)? '(' + apuesta.evento.resultado.puntuacion1 + ')' : '' }} - {{ (apuesta.evento.terminado)? '(' + apuesta.evento.resultado.puntuacion2 + ')' : '' }}
+                  <span>{{ apuesta.evento.participante2.nombre }}</span>
+                  <img class="imgEquipo" src="data:image/png;base64,{{apuesta.evento.participante2.imagen}}">
+                </mat-panel-title>
+                <mat-panel-description>
+                  Fecha evento: {{ apuesta.evento.fecha | date:'dd/MM/yy HH:mm' }}
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+          
+              <mat-form-field appearance="fill">
+                <mat-label>Fecha apuesta</mat-label>
+                <input matInput disabled [value]="apuesta.fecha | date:'dd/MM/yy HH:mm'">
+              </mat-form-field>
+          
+              <mat-form-field *ngIf="apuesta.ganador != null" appearance="fill">
+                <mat-label>Ganador</mat-label>
+                <input matInput disabled [value]="apuesta.ganador.nombre">
+              </mat-form-field>
+
+              <mat-form-field appearance="fill">
+                <mat-label>Puntuacion 1</mat-label>
+                <input matInput disabled [value]="apuesta.puntuacion1">
+              </mat-form-field>
+
+              <mat-form-field appearance="fill">
+                <mat-label>Puntuacion 2</mat-label>
+                <input matInput disabled [value]="apuesta.puntuacion2">
+              </mat-form-field>
+
+              <mat-form-field appearance="fill">
+                <mat-label>Cantidad</mat-label>
+                <input matInput disabled [value]="apuesta.cantidadApostada">
+              </mat-form-field>
+
+              <mat-form-field appearance="fill">
+                <mat-label>Cuota</mat-label>
+                <input matInput disabled [value]="apuesta.cuota">
+              </mat-form-field>
+
+              <mat-form-field appearance="fill">
+                <mat-label>{{(apuesta.evento.terminado)? 'Premio final' : 'Premio potencial'}}</mat-label>
+                <input matInput class="premio" disabled [value]="(apuesta.evento.terminado)? apuesta.premio : apuesta.premioPotencial">
+              </mat-form-field>
+
+              <mat-action-row *ngIf="!apuesta.evento.terminado">
+                <button mat-button color="warn" (click)="borrarApuesta(apuesta.idapuesta)">Borrar</button>
+                <button mat-button color="primary" (click)="modificarApuesta(apuesta.evento.id, apuesta.idapuesta)">Modificar</button>
+              </mat-action-row>
+          
+            </mat-expansion-panel>
+        </mat-accordion>
+
+      </mat-card-content>
+    </mat-card>      
+</div> 
+

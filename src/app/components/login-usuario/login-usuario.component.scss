@@ -1,0 +1,19 @@
+#loginDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.example-card {
+  width: 400px;
+  box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+}
+  
+mat-form-field {
+  width: 100%;
+}
+
+.errorValidacion {
+  color: darkred;
+}

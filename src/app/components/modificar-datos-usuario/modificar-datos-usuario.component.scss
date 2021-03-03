@@ -1,0 +1,52 @@
+.contenedorPrincipal {
+    display: flex;
+    justify-content: center;
+}
+
+.example-card {
+    margin-top: 5vh;
+    width: 75%;
+    height: 75vh;
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+}
+
+mat-card-header {
+    height: 10%;
+}
+
+button {
+    height: fit-content;
+}
+
+#boton-revertir-cambios {
+    margin-left: auto;
+    margin-right: 10px;
+}
+
+#contenedorFormulario {
+    margin-top: 30px;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+}
+
+form {
+    width: 75%;
+}
+
+mat-form-field {
+    width: 45%;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+.divCentrado {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.errorValidacion {
+    color: darkred;
+}
+  

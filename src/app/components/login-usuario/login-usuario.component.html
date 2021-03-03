@@ -1,0 +1,35 @@
+<div id="loginDiv">
+    <mat-card class="example-card">
+        <mat-card-header>
+            <mat-card-title>CODELE</mat-card-title>
+            <mat-card-subtitle>Login</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="../../../assets/img/login.jpg">
+        <mat-card-content>
+            <form [formGroup]="loginForm">
+                <mat-form-field appearance="fill">
+                    <mat-label>Email</mat-label>
+                    <input matInput formControlName="email">
+                    <ng-container *ngIf="loginForm.controls.email.errors">
+                        <div class="errorValidacion" *ngIf="loginForm.controls.email.errors.required"><small>Campo requerido</small></div>
+                        <div class="errorValidacion" *ngIf="loginForm.controls.email.errors.email"><small>Dirección de correo no válida</small></div>
+                    </ng-container>
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Password</mat-label>
+                    <input matInput formControlName="password" [type]="hide ? 'password' : 'text'">
+                    <ng-container *ngIf="loginForm.controls.password.errors">
+                        <div class="errorValidacion" *ngIf="loginForm.controls.password.errors.required"><small>Campo requerido</small></div>
+                    </ng-container>
+                    <button mat-icon-button matSuffix (click)="hide = !hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </mat-form-field>
+            </form>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button color="primary" [disabled]="loginForm.invalid" (click)="autenticarUsuario()">Entrar</button>
+            <button mat-raised-button color="accent" (click)="navegarARegistrarUsuario()">Registrarse</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

@@ -1,0 +1,5 @@
+<mat-tab-group [color]="'accent'" (selectedTabChange)="getAllApuestas($event.index)">
+    <mat-tab label="Pendientes" ><app-tipos-apuestas [apuestas]="apuestasUsuario" [tipo]="'pendientes'" (refreshClick)="getAllApuestas(currentTab)"></app-tipos-apuestas></mat-tab>
+    <mat-tab label="Cerradas"><app-tipos-apuestas [apuestas]="apuestasUsuario" [tipo]="'cerradas'" (refreshClick)="getAllApuestas(currentTab)"></app-tipos-apuestas></mat-tab>
+</mat-tab-group>  
+

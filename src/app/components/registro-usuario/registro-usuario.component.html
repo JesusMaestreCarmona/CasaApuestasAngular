@@ -1,0 +1,99 @@
+<div id="loginRegistro">
+  <mat-card class="example-card">
+    <mat-card-header>
+        <mat-card-title>CODELE</mat-card-title>
+        <mat-card-subtitle>Registro</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>  
+      <mat-horizontal-stepper [linear]="true" #stepper>
+        <mat-step [stepControl]="formDatosPersonales">
+          <form [formGroup]="formDatosPersonales">
+            <ng-template matStepLabel>Datos personales</ng-template>
+            <mat-form-field appearance="fill">
+              <mat-label>Nombre</mat-label>
+              <input matInput formControlName="nombre">
+              <ng-container *ngIf="formDatosPersonales.controls.nombre.errors">
+                <div class="errorValidacion" *ngIf="formDatosPersonales.controls.nombre.errors.required"><small>Campo requerido</small></div>
+              </ng-container>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>Apellidos</mat-label>
+              <input matInput formControlName="apellidos">
+              <ng-container *ngIf="formDatosPersonales.controls.apellidos.errors">
+                <div class="errorValidacion" *ngIf="formDatosPersonales.controls.apellidos.errors.required"><small>Campo requerido</small></div>
+              </ng-container>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>Sexo</mat-label>
+              <mat-select formControlName="sexo">
+                <mat-option *ngFor="let tipoSexo of tiposSexo" [value]="tipoSexo.id">
+                  {{tipoSexo.descripcion}}
+                </mat-option>
+              </mat-select>
+              <ng-container *ngIf="formDatosPersonales.controls.sexo.errors">
+                <div class="errorValidacion" *ngIf="formDatosPersonales.controls.sexo.errors.required"><small>Campo requerido</small></div>
+              </ng-container>
+            </mat-form-field>
+            <div>
+              <button mat-raised-button [disabled]="formDatosPersonales.invalid" color="primary" matStepperNext>Siguiente</button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step [stepControl]="formDatosLogin">
+          <form [formGroup]="formDatosLogin">
+            <ng-template matStepLabel>Datos para login</ng-template>
+            <mat-form-field appearance="fill">
+              <mat-label>Email</mat-label>
+              <input matInput formControlName="email">
+              <ng-container *ngIf="formDatosLogin.controls.email.errors">
+                <div class="errorValidacion" *ngIf="formDatosLogin.controls.email.errors.required"><small>Campo requerido</small></div>
+                <div class="errorValidacion" *ngIf="formDatosLogin.controls.email.errors.email"><small>Dirección de correo no válida</small></div>
+                <div class="errorValidacion" *ngIf="formDatosLogin.controls.email.errors.emailExiste"><small>Ya hay un usuario registrado con este email</small></div>
+              </ng-container>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>Password</mat-label>
+              <input matInput formControlName="password" [type]="hide ? 'password' : 'text'">
+              <ng-container *ngIf="formDatosLogin.controls.password.errors">
+                <div class="errorValidacion" *ngIf="formDatosLogin.controls.password.errors.required"><small>Campo requerido</small></div>
+              </ng-container>
+              <button mat-icon-button matSuffix (click)="hide = !hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+            </mat-form-field>
+            <div>
+              <button mat-raised-button matStepperPrevious>Volver</button>
+              <button mat-raised-button [disabled]="formDatosLogin.invalid || errorEmailExiste" color="primary" matStepperNext>Siguiente</button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step [stepControl]="formImagen" optional>
+          <form [formGroup]="formImagen">
+            <ng-template matStepLabel>Datos para login</ng-template>
+            <div id="divCambiarImagen">
+              <button mat-button (click)="fileInput.click()"> 
+                  <app-imagen-usuario [imagen]="imagenActual" [width]="100" [height]="100"></app-imagen-usuario>
+              </button>
+              <input hidden (change)="usuarioSeleccionaFicheroImagen()" #fileInput type="file" id="file">
+            </div>
+            <p style="text-align: center; margin-bottom: 25px;">Clic sobre la imagen para cambiarla</p>
+            <div>
+              <button mat-raised-button matStepperPrevious>Volver</button>
+              <button mat-raised-button color="primary" matStepperNext>Siguiente</button>
+            </div>  
+          </form>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Completado!</ng-template>
+          <p>Has terminado el proceso de registro. Haga click en confirmar.</p>
+          <div>
+            <button mat-button matStepperPrevious>Volver</button>
+            <button mat-button color="warn" (click)="stepper.reset()">Comenzar de nuevo</button>
+            <button mat-button color="primary" (click)="registrarUsuario()">Confirmar</button>
+          </div>
+        </mat-step>
+      </mat-horizontal-stepper>
+    </mat-card-content>
+  </mat-card>
+</div>
+

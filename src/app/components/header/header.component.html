@@ -1,0 +1,41 @@
+<ng-container *ngIf="usuarioAutenticado != null">  
+  <mat-toolbar color="accent">
+      <mat-toolbar-row>
+        <button mat-flat-button color="primary" (click)="navegarHaciaPrincipal()">
+          <span id="titulo">Codele</span>
+        </button>
+    
+        <span class="spacer"></span>
+        
+          <mat-chip-list>
+            <mat-chip>
+              <mat-icon>credit_card</mat-icon><span class="{{(usuarioAutenticado.saldo > 0)? 'saldoPositivo' : 'saldoNegativo'}}">{{(usuarioAutenticado.saldo > 0)? '+'+usuarioAutenticado.saldo : usuarioAutenticado.saldo}}€</span>
+            </mat-chip>
+          </mat-chip-list>
+
+          <button mat-button [matMenuTriggerFor]="menu" matTooltip="{{usuarioAutenticado.nombre + ' ' + usuarioAutenticado.apellidos}}">
+            <app-imagen-usuario [imagen]="usuarioAutenticado.imagen" [width]="50" [height]="50"></app-imagen-usuario>
+          </button> 
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="misApuestas()">
+              <mat-icon>business_center</mat-icon>
+              <span>Mis apuestas</span>
+            </button>
+            <mat-divider></mat-divider>
+            <button mat-menu-item (click)="modificarDatosUsuario()">
+              <mat-icon>settings</mat-icon>
+              <span>Modificar datos usuario</span>
+            </button>
+            <button mat-menu-item (click)="modificarPassword()">
+              <mat-icon>security</mat-icon>
+              <span>Modificar contraseña</span>
+            </button>
+            <mat-divider></mat-divider>
+            <button mat-menu-item (click)="dialogoAbandonarSesion()">
+              <mat-icon>exit_to_app</mat-icon>
+              <span>Abandonar la sesión</span>
+            </button>
+          </mat-menu> 
+      </mat-toolbar-row>
+    </mat-toolbar>
+</ng-container>

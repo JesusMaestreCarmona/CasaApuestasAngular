@@ -1,0 +1,36 @@
+mat-toolbar {
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+}
+
+#logo .mat-icon {
+    font-size: 40px;
+    margin-right: 20px;
+}
+
+#titulo {
+    font-size: 25px;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+.saldoPositivo {
+    color: #009688;
+    margin-left: 5px;
+    margin-right: 10px;
+}
+
+.saldoNegativo {
+    color: #f44336;
+    margin-left: 5px;
+    margin-right: 10px;
+}  
+
+mat-chip {
+    background-color: white !important;
+    margin-right: 10px;
+    span {
+        margin-right: 0;
+    }
+}

@@ -1,0 +1,82 @@
+<div id="apuestaDiv">  
+    <mat-card class="example-card" *ngIf="evento != null">
+        <mat-card-header>
+          <mat-card-title>{{evento.participante1.nombre}} - {{evento.participante2.nombre}} ({{evento.categoria.descripcion}})</mat-card-title>
+          <mat-card-subtitle>Tramita tu apuesta</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>    
+          <div class="divTextoCentrado"><h2>Cuotas: 1: {{evento.cuota1}} - X: {{evento.cuotax}} - 2: {{evento.cuota2}}</h2> </div>
+            <form [formGroup]="formApuesta" class="">
+              <mat-form-field appearance="fill">
+                <mat-label>Fecha del evento</mat-label>
+                <input matInput type="date" disabled [value]="evento.fecha | date:'yyyy-MM-dd'" class="example-right-align">
+              </mat-form-field>
+              <mat-form-field appearance="fill">
+                <mat-label>Resultado</mat-label>
+                <mat-select formControlName="resultado">
+                  <mat-option value="1">1 - {{evento.participante1.nombre}}</mat-option>
+                  <mat-option value="X" *ngIf="evento.categoria.descripcion != 'Baloncesto'">X - Empate</mat-option>
+                  <mat-option value="2">2 - {{evento.participante2.nombre}}</mat-option>
+                </mat-select>
+                <ng-container *ngIf="formApuesta.controls.resultado.errors">
+                  <div class="errorValidacion" *ngIf="formApuesta.controls.resultado.errors.required"><small>Campo requerido</small></div>
+                </ng-container>
+                <mat-hint align="end">Click para desplegar las opciones ^</mat-hint>
+              </mat-form-field>
+              <ng-container *ngIf="formApuesta.controls.resultado.value != ''">
+                <mat-form-field appearance="fill" class="numberField">
+                  <mat-label>Puntuacion 1</mat-label>
+                  <input matInput type="number" min="0" formControlName="puntuacion1">
+                  <ng-container *ngIf="formApuesta.controls.puntuacion1.errors">
+                    <div class="errorValidacion" *ngIf="formApuesta.controls.puntuacion1.errors.required"><small>Campo requerido</small></div>
+                    <div class="errorValidacion" *ngIf="formApuesta.controls.puntuacion1.errors.pattern"><small>No se admiten decimales</small></div>
+                  </ng-container>
+                </mat-form-field>
+              </ng-container>
+              <ng-container *ngIf="formApuesta.controls.resultado.value != ''">
+                <mat-form-field appearance="fill" class="numberField">
+                  <mat-label>Puntuacion 2</mat-label>
+                  <input matInput type="number" min="0" formControlName="puntuacion2">
+                  <ng-container *ngIf="formApuesta.controls.puntuacion2.errors">
+                    <div class="errorValidacion" *ngIf="formApuesta.controls.puntuacion2.errors.required"><small>Campo requerido</small></div>
+                    <div class="errorValidacion" *ngIf="formApuesta.controls.puntuacion2.errors.pattern"><small>No se admiten decimales</small></div>
+                  </ng-container>
+                </mat-form-field>
+              </ng-container>
+              <mat-form-field appearance="fill" class="numberField">
+                <mat-label>Cantidad</mat-label>
+                <input matInput type="number" formControlName="cantidad" min="1" class="example-right-align">
+                <span matSuffix>€&nbsp;</span>
+                <ng-container *ngIf="formApuesta.controls.cantidad.errors">
+                  <div class="errorValidacion" *ngIf="formApuesta.controls.cantidad.errors.required"><small>Campo requerido</small></div>
+                  <div class="errorValidacion" *ngIf="formApuesta.controls.cantidad.errors.max"><small>Has superado tu saldo</small></div>
+                </ng-container>
+              </mat-form-field>
+              <ng-container *ngIf="formApuesta.controls.resultado.value != ''">
+                <mat-form-field appearance="fill" class="numberField">
+                  <mat-label>Cuota</mat-label>
+                  <input matInput disabled [value]="(formApuesta.controls.resultado.value == '1')? evento.cuota1 : 
+                  (formApuesta.controls.resultado.value == 'X')? evento.cuotax : evento.cuota2" id="cuota">
+                  <span matSuffix>€&nbsp;</span>
+                </mat-form-field>
+              </ng-container>
+              <ng-container *ngIf="!formApuesta.invalid">
+                <mat-form-field appearance="fill" class="numberField">
+                  <mat-label>Premio potencial</mat-label>
+                  <input matInput disabled [value]="formApuesta.controls.cantidad.value * ((formApuesta.controls.resultado.value == '1')? evento.cuota1 : 
+                  (formApuesta.controls.resultado.value == 'X')? evento.cuotax : evento.cuota2) * 2" id="premio">
+                  <span matSuffix>€&nbsp;</span>
+                </mat-form-field>
+              </ng-container>
+            </form>
+            <ng-container *ngIf="formApuesta.errors">
+              <div class="errorValidacion" *ngIf="formApuesta.errors.errorPuntos1">Has elegido que el participante 1 gana, debes indicar una puntuación lógica</div>
+              <div class="errorValidacion" *ngIf="formApuesta.errors.errorPuntos2">Has elegido que el participante 2 gana, debes indicar una puntuación lógica</div>
+              <div class="errorValidacion" *ngIf="formApuesta.errors.errorPuntosX">Has elegido empate, debes indicar una puntuación lógica</div>
+            </ng-container>   
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button [disabled]="formApuesta.invalid || usuarioAutenticado.saldo < 0" (click)="apostar()" color="primary">Apostar</button>
+        </mat-card-actions>
+    </mat-card>  
+</div>

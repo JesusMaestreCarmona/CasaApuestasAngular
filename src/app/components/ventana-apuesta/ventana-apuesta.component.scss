@@ -1,0 +1,41 @@
+.example-card {
+    width: 500px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;  
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+.numberField {
+    width: 40%;
+}
+
+mat-card-content {
+    margin-top: 10px;
+}
+
+#apuestaDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 50px;
+}
+
+.divTextoCentrado {
+    text-align: center;
+}
+
+.errorValidacion {
+    color: darkred;
+    margin-bottom: 5px;
+}
+  
+#premio {
+    color: #009688;
+}

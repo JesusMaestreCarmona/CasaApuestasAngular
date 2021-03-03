@@ -1,0 +1,88 @@
+.imgEquipo {
+    width: 20px;
+}
+
+span {
+    padding: 10px;
+}
+
+.mat-tab-group {
+    margin-bottom: 48px;
+}
+
+.example-action-buttons {
+    padding-bottom: 20px;
+}
+
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+    flex-basis: 0;
+}
+
+.example-headers-align .mat-form-field + .mat-form-field {
+    margin-left: 8px;
+}
+
+mat-panel-title, mat-panel-description {
+    display: flex;
+    text-align: center;
+    align-items: center;
+}
+
+.premio {
+    color: #009688;
+}
+
+.contenedorPrincipal {
+    display: flex;
+    justify-content: center;
+    background-color: #009688;
+}
+
+.example-card {
+    margin-top: 5vh;
+    width: 85%;
+    height: 70vh;
+}
+
+mat-card-header {
+    height: 10%;
+}
+
+#contenedorApuestas {
+    margin-top: 30px;
+    height: 80%;
+    overflow: auto; 
+    display: flex;
+    justify-content: center;
+}
+
+#contenedorApuestas::-webkit-scrollbar {
+    -webkit-appearance: none;
+    background-color: white;
+}
+
+#contenedorApuestas::-webkit-scrollbar:vertical {
+    width:5px;
+}
+
+#contenedorApuestas::-webkit-scrollbar-button:increment, #contenedorApuestas::-webkit-scrollbar-button {
+    display: none;
+}
+
+#contenedorApuestas::-webkit-scrollbar:horizontal {
+    height: 10px;
+}
+
+#contenedorApuestas::-webkit-scrollbar-thumb {
+    background-color: lightgray;
+    border-radius: 20px;
+}
+
+#contenedorApuestas::-webkit-scrollbar-thumb:hover {
+    background: darkgray;
+}
+
+#boton-recargar-apuestas {
+    margin-left: auto;
+}
